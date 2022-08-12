@@ -25,7 +25,7 @@ def preprocessing(df):
     # missing_values_df = df.isnull().sum().iloc[:, 1] != 0
     missing_values_df= pd.DataFrame(missing_values_df[missing_values_df!=0])
     # st.write("x")
-    # st.write(missing_values_df)
+    # st.write(missing_values_dfx)
     mode_df=pd.read_csv('../Model/mode.csv')
     mode_df.set_index('col',inplace=True)
     # st.write(mode_df)
