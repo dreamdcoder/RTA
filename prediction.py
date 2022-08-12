@@ -40,8 +40,8 @@ def preprocessing(df):
     return X
 
 def prediction(df):
-    model = joblib.load("../../Model/model.pkl")
-    y_enc=joblib.load(("../../Model/Y_Encoder.pkl"))
+    model = joblib.load("../Model/model.pkl")
+    y_enc=joblib.load(("../Model/Y_Encoder.pkl"))
     y=model.predict(df)
     y_val=y_enc.inverse_transform(np.array(y).reshape(-1,1))
     st.write(f" The person met with accident will have {y_val[-1,0]}.")
