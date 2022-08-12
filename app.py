@@ -1,3 +1,4 @@
+import os
 from io import StringIO
 
 import streamlit as st
@@ -25,6 +26,7 @@ def upload_file():
              prediction(X)
 
 if __name__ == '__main__':
+     st.write(os.getcwd())
      upload_file()
 
 

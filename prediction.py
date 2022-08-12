@@ -2,6 +2,8 @@
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import os
+
 import numpy as np
 import pandas as pd
 import joblib
@@ -10,7 +12,7 @@ import streamlit as st
 
 def preprocessing(df):
     # df.columns = df.columns.str.lower()
-
+    # st.write(os.getcwd())
     df['Time'] = pd.to_datetime(df['Time'])
     df['hour'] = df['Time'].dt.hour
     df['minute'] = df['Time'].dt.minute
@@ -24,7 +26,7 @@ def preprocessing(df):
     missing_values_df= pd.DataFrame(missing_values_df[missing_values_df!=0])
     # st.write("x")
     # st.write(missing_values_df)
-    mode_df=pd.read_csv('D:\RTA\Model\mode.csv')
+    mode_df=pd.read_csv('../../Model/mode.csv')
     mode_df.set_index('col',inplace=True)
     # st.write(mode_df)
 
@@ -33,13 +35,13 @@ def preprocessing(df):
         # st.write(mode)
         df[col].fillna(mode, inplace=True)
     # st.write(df)
-    enc = joblib.load("D:\RTA\Model\X_Encoder.pkl")
+    enc = joblib.load("../../Model/X_Encoder.pkl")
     X = enc.transform(df)
     return X
 
 def prediction(df):
-    model = joblib.load("D:\RTA\Model\model.pkl")
-    y_enc=joblib.load(("D:\RTA\Model\Y_Encoder.pkl"))
+    model = joblib.load("../../Model/model.pkl")
+    y_enc=joblib.load(("../../Model/Y_Encoder.pkl"))
     y=model.predict(df)
     y_val=y_enc.inverse_transform(np.array(y).reshape(-1,1))
     st.write(f" The person met with accident will have {y_val[-1,0]}.")
