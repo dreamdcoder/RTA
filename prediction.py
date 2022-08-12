@@ -26,7 +26,7 @@ def preprocessing(df):
     missing_values_df= pd.DataFrame(missing_values_df[missing_values_df!=0])
     # st.write("x")
     # st.write(missing_values_df)
-    mode_df=pd.read_csv('../../Model/mode.csv')
+    mode_df=pd.read_csv('../Model/mode.csv')
     mode_df.set_index('col',inplace=True)
     # st.write(mode_df)
 
@@ -35,7 +35,7 @@ def preprocessing(df):
         # st.write(mode)
         df[col].fillna(mode, inplace=True)
     # st.write(df)
-    enc = joblib.load("../../Model/X_Encoder.pkl")
+    enc = joblib.load("../Model/X_Encoder.pkl")
     X = enc.transform(df)
     return X
 
